@@ -2,13 +2,13 @@ var user = {email: "", password: ""};
 var emailLogin = "";
 var passwordLogin = "";
 
-document.getElementById("buttonLogin").addEventListener("click", loginUser);
 
 function moveRight(id, html)
 {
     var element = document.getElementById(id);
     element.className = "moveRight";
-    element.addEventListener('webkitAnimationEnd', function( event ) { 
+    element.addEventListener('webkitAnimationEnd', function( event ) {
+
     element.parentNode.removeChild(element);
     var node = document.createElement("LI");                 
     var textnode = document.createTextNode("");         
@@ -17,6 +17,10 @@ function moveRight(id, html)
     document.getElementById("mainView").appendChild(node);
     node.innerHTML = html; 
     node.className += "animated bounceInLeft";
+    if(document.title == "Edit Account")
+    {
+        loadUserData();
+    } 
     }, false );
 }
 
@@ -72,8 +76,8 @@ function loginUser()
                 var passwordInput = document.getElementById("passwordLogin");
                 emailInput.style.borderColor = "green";
                 passwordInput.style.borderColor = "green";
-                moveUp("child", text);
-                localStorage.setItem("user", user.email);
+                localStorage.setItem("user", text);
+                loadUserLog();
             }
             else
             {
@@ -123,13 +127,14 @@ function loadUserLog()
             var text = xhttp.responseText;
             if(text)
             {
-                moveLeft("child", text);
+                moveUp("child", text);
                 setDisplayLocal(text, "User Log");
                 document.title = "User Log";
+                
             }
         }
     };
-    xhttp.open("POST", "index.php/user/loadRegister", true);
+    xhttp.open("POST", "index.php/user/loadUserLog", true);
     xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
     xhttp.send();
 }
@@ -294,6 +299,9 @@ function loadLoginForm()
                 moveRight("child", text);
                 setDisplayLocal(text, "Login");
                 document.title = "Login";
+                user
+                localStorage.removeItem("user");
+
             }
         }
     };
@@ -391,7 +399,6 @@ function getRandomColor()
     function showMeClass(classI)
     {
       var display = document.getElementsByClassName(classI).style;
-      console.log(display);
       if(display == 'none')
       {
        document.getElementsByClassName(classI).style.display = "inline-block";
@@ -405,11 +412,11 @@ function getRandomColor()
 
     //register methods
 
-    var nameValue = "";
+var nameValue = "";
 var emailValue = "";
 var passwordValue = "";
 var birthdayValue = "";
-var newUser = {name_user: '', email: '', password: '', date_birth: ''};
+
 
 
 
@@ -524,7 +531,7 @@ function VerifyEmail(email, inputText, message)
             }
         }
     };
-    xhttp.open("POST", "<?php echo site_url('user/VerifyEmail') ?>", true);
+    xhttp.open("POST", "index.php/user/VerifyEmail", true);
     xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
     xhttp.send(param);
 }
@@ -563,14 +570,142 @@ function enableRegister()
     }
 }
 
-function registerUser()
+function loadEditForm()
 {
-    //add values to user object
-    newUser.name_user = nameValue;
-    newUser.email = emailValue;
-    newUser.password = passwordValue;
-    newUser.date_birth = birthdayValue;
-    var userJSON = JSON.stringify(user);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+        if (xhttp.readyState == 4 && xhttp.status == 200) 
+        {
+            var text = xhttp.responseText;
+            if(text)
+            {
+                moveRight("child", text);
+                setDisplayLocal(text, "Edit Account");
+                document.title = "Edit Account";
+                loadUserData();
+            }
+        }
+    };
+    xhttp.open("POST", "index.php/user/loadEdit", true);
+    xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+    xhttp.send();
+}
+
+function loadUserData()
+{
+    var user = JSON.parse(localStorage.getItem("user"));
+    var name = document.getElementById("userName");
+    var email = document.getElementById("userEmail");
+    var password = document.getElementById("userPassword");
+    var confirm = document.getElementById("confirmPassword");
+    var birth = document.getElementById("birthDate");
+    name.value = user.name_user;
+    email.value = user.email;
+    password.value = user.password;
+    confirm.value = user.password;
+    birth.value = user.date_birth;
+}
+
+function editUser()
+{
+    var user = JSON.parse(localStorage.getItem("user"));
+    var name = document.getElementById("userName");
+    var email = document.getElementById("userEmail");
+    var password = document.getElementById("userPassword");
+    var confirm = document.getElementById("confirmPassword");
+    var birth = document.getElementById("birthDate");
+    var number = 0;
+
+    if(name.value != user.name_user)
+    {
+        user.name_user = name.value;
+        number++;
+    }
+
+    if(email.value != user.email)
+    {
+        user.email = email.value;
+        number++;
+    }
+
+    if((password.value == confirm.value))
+    {
+        if(password.value != user.password)
+        {
+            user.password = password.value;
+            number++;
+        }
+    }
+    else
+    {
+        var message = document.getElementById("passwordMessage"); 
+        message.innerHTML = "The passwords entered do not match.";
+        message.style.display = "block";
+        password.style.borderColor = "red";
+        confirm.style.borderColor = "red";
+    }
+
+    if(birth.value != user.date_birth)
+    {
+        user.date_birth = birth.value;
+        number++;
+    }
+
+    if(number > 0)
+    {
+        var userJSON = JSON.stringify(user);
+        var param = "user="+userJSON;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() 
+        {
+            if (xhttp.readyState == 4 && xhttp.status == 200) 
+            {
+                var text = xhttp.responseText;
+                if(text)
+                {
+                    localStorage.setItem("user", text);
+                    var messagePositive = document.getElementById("RegisterMessage");
+                    messagePositive.innerHTML = "Your account data has been successfully edited!";
+                    messagePositive.style.display = "block";
+                    var message = document.getElementById("nameMessage"); 
+                    message.innerHTML = "";
+                    message.style.display = "none";
+                }
+                else
+                {
+                    var nameInput = document.getElementById("userName");
+                    var emailInput = document.getElementById("userEmail");
+                    var passwordInput = document.getElementById("userPassword");
+                    var confirmInput = document.getElementById("confirmPassword");
+                    var birthInput = document.getElementById("birthDate");
+                    var message = document.getElementById("RegisterMessage");
+                    message.innerHTML = "There was an error";
+                    message.style.display = "block";
+                    nameInput.style.borderColor = "red";
+                    emailInput.style.borderColor = "red";
+                    passwordInput.style.borderColor = "red";
+                    confirmPassword.style.borderColor = "red";
+                    birthInput.style.borderColor = "red";
+                }
+            }
+        };
+        xhttp.open("POST", "index.php/user/editUser", true);
+        xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+        xhttp.send(param);
+    }
+    else
+    {
+        var message = document.getElementById("nameMessage"); 
+        message.innerHTML = "You have made no changes.";
+        message.style.display = "block";
+    }
+}
+
+function registerUser()
+{   
+    var newUser = {name_user: nameValue, email: emailValue, password: passwordValue, date_birth: birthdayValue};
+    var userJSON = JSON.stringify(newUser);
     var param = "user="+userJSON;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() 
@@ -578,22 +713,37 @@ function registerUser()
         if (xhttp.readyState == 4 && xhttp.status == 200) 
         {
             var text = xhttp.responseText;
-            if(text == "You were registered!")
+            if(text)
             {
-                document.getElementById('RegisterMessage').innerHTML = text;
-                moveLeft("formRegister");
-                localStorage.setItem("user", newUser.email);
+                localStorage.setItem("user", text);
+                loadUserLog();
+            }
+            else
+            {
+                var nameInput = document.getElementById("userName");
+                var emailInput = document.getElementById("userEmail");
+                var passwordInput = document.getElementById("userPassword");
+                var confirmInput = document.getElementById("confirmPassword");
+                var birthInput = document.getElementById("birthDate");
+                var message = document.getElementById("RegisterMessage");
+                message.innerHTML = "There was an error";
+                message.style.display = "block";
+                nameInput.style.borderColor = "red";
+                emailInput.style.borderColor = "red";
+                passwordInput.style.borderColor = "red";
+                confirmPassword.style.borderColor = "red";
+                birthInput.style.borderColor = "red";
             }
         }
     };
-    xhttp.open("POST", "<?php echo site_url('user/AddNewUser') ?>", true);
+    xhttp.open("POST", "index.php/user/AddNewUser", true);
     xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
     xhttp.send(param);
 }
 
 function checkLocal()
 {
-    var user = localStorage.getItem("user");
+    var user = JSON.parse(localStorage.getItem("user"));
     var text = localStorage.getItem("display");
     var title = localStorage.getItem("title");
     // if(user)
@@ -613,6 +763,7 @@ function checkLocal()
         node.innerHTML = text; 
         node.className += "animated zoomInUp";
         document.title = title;
+        document.getElementById("userStats").innerHTML = user.id;
     }
 }
 

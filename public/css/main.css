@@ -1,17 +1,17 @@
 @font-face {
     font-family: "Gill Sans";
-    src: url(http://jsontest.localhost/public/fonts/gill_sans.ttf) format("truetype");
+    src: url(../fonts/gill_sans.ttf) format("truetype");
 }
 
 @font-face {
     font-family: "Gill Sans Bold";
-    src: url(http://jsontest.localhost/public/fonts/gill_sans_bold.ttf) format("truetype");
+    src: url(../fonts/gill_sans_bold.ttf) format("truetype");
 }
 
 body, html{
   margin: 0;
   padding: 0;
-  background-color: #EEEEEE;
+  /*background-color: #EEEEEE;*/
     letter-spacing: 1.3px;
      font-family: "Gill Sans";
 }
@@ -69,7 +69,7 @@ input.star + label.star {
   font-size: 36px;
   color: #444;
   transition: all .2s;
-   background: url('http://jsontest.localhost/public/images/cookiesBlack.png');
+   background: url('/public/images/cookiesBlack.png');
    background-size: 50px 50px;
    height: 50px;
    width: 50px;
@@ -95,7 +95,7 @@ height: 50px;
 font-size: 36px;
 color: #444;
 transition: all .2s;
-background: url('http://jsontest.localhost/public/images/cookies.png');
+background: url('/public/images/cookies.png');
 background-size: 50px 50px;
 background-repeat: no-repeat;
 }
@@ -110,6 +110,57 @@ label.star:hover { transform: rotate(20deg) scale(1.5);}
  
 label.star:before {
   
+}
+
+.background-image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.some-copy {
+    margin-top: 800px;
+}
+
+/* Background image URLs and "stack" order. */
+.first-image {
+    background-image: url('/public/images/healthy-cooking.jpg');
+    z-index: -3;
+    opacity: 0;
+}
+
+.second-image {
+    background-image: url('/public/images/baking.jpg');
+   z-index: -2;
+    opacity: 0;
+}
+
+.third-image {
+    background-image: url('/public/images/cooking.png');
+   z-index: -1;
+    opacity: 0;
+
+}
+
+.first-image.show {
+    opacity: 1;
+}
+
+.second-image.show {
+    opacity: 1;
+}
+
+.third-image.show {
+    opacity: 1;
+}
+
+.toggle-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 800px;
+    transition: opacity 1s ease-in-out;
 }
 
 #footerlist ul{
@@ -131,15 +182,15 @@ input{
   width: 200px;
 }
 
-body{
-  background: url('http://jsontest.localhost/public/images/back.jpg');
+/*body{
+  background: url('/public/images/back.jpg');
   background-size: 100%;
   background-repeat: no-repeat;
   width: 100%;
   height: 700px;
   background-attachment: fixed, scroll;
-  /*background: radial-gradient(circle, black, white);*/
-}
+  /*background: radial-gradient(circle, black, white);
+}*/
 
 .pic{
   float: left;
@@ -148,7 +199,7 @@ body{
 }
 
 .arrowRight{
-  background: url('http://jsontest.localhost/public/images/arrow.png');
+  background: url('/public/images/arrow.png');
   background-size: 100px 100px;
   background-repeat: no-repeat;
   border-style:none;
@@ -160,14 +211,14 @@ body{
 
 .arrowRight:hover{
   cursor: pointer;
-  background: url('http://jsontest.localhost/public/images/arrowG.png');
+  background: url('/public/images/arrowG.png');
   background-size: 100px 100px;
   background-repeat: no-repeat;
   border-style:none;
 }
 
 .arrowRight:active{
-  background: url('http://jsontest.localhost/public/images/arrowW.png');
+  background: url('/public/images/arrowW.png');
   background-size: 100px 100px;
   background-repeat: no-repeat;
   border-style:none;

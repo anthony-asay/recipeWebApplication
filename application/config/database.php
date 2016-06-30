@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'jsontest.localhost',
-	'username' => 'mgs_user',
-	'password' => 'pa55word',
-	'database' => 'criticfi_mydatos',
+	'hostname' => 'recipe.localhost',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'criticfi_recipes',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

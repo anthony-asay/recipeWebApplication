@@ -39,3 +39,5 @@
       <input type='button' value='color 4' onclick="changeColor('four')">
     </div>
   </div>
+  <button class="btn" onclick="loadLoginForm()">Return to Login</button>
+<div id="userStats"></div>
