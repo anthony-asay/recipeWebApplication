@@ -1,4 +1,4 @@
-<button class="btn" onclick="loadLoginForm()">Logout</button>
+<button class="btn" onclick="loadLoginForm()">Logout</button> <h1>Hello</h1>
 	<div id="formRegister" class="form" onload="loadUserData()">
 		<div class="header"><button class="btn" onclick="loadUserLog()">Return to Log</button></div>
 		<form action="" method="post">

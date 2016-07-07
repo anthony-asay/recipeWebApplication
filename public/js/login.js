@@ -96,7 +96,28 @@ function loginUser()
     xhttp.send(param);
 }
 
-function loadRegisterForm()
+function loadRecipeForm()
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+        if (xhttp.readyState == 4 && xhttp.status == 200) 
+        {
+            var text = xhttp.responseText;
+            if(text)
+            {
+                moveRight("child", text);
+                setDisplayLocal(text, "Add Recipe");
+                document.title = "Add Recipe";
+            }
+        }
+    };
+    xhttp.open("POST", "index.php/recipe/loadRecipeForm", true);
+    xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+    xhttp.send();
+}
+
+function loadIngredientForm()
 {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() 
@@ -107,12 +128,33 @@ function loadRegisterForm()
             if(text)
             {
                 moveLeft("child", text);
-                setDisplayLocal(text, "Register");
-                document.title = "Register";
+                setDisplayLocal(text, "Add Ingredient");
+                document.title = "Add Ingredient";
             }
         }
     };
-    xhttp.open("POST", "index.php/user/loadRegister", true);
+    xhttp.open("POST", "index.php/recipe/loadIngredientForm", true);
+    xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+    xhttp.send();
+}
+
+function loadHome()
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+        if (xhttp.readyState == 4 && xhttp.status == 200) 
+        {
+            var text = xhttp.responseText;
+            if(text)
+            {
+                moveLeft("child", text);
+                setDisplayLocal(text, "Home");
+                document.title = "Home";
+            }
+        }
+    };
+    xhttp.open("POST", "index.php/recipe/loadHome", true);
     xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
     xhttp.send();
 }

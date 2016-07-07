@@ -83,14 +83,13 @@ class Ingredient_model extends CI_Model {
 
 		public function Set_Ingredient($ingData)
         {
-            $this->load->helper('url');
 
             $data = array(
                 'id_type' => $ingData->id_type,
                 'name' => $ingData->name
                 );
-        
-            return $this->db->insert('ingredient', $data);
+            $this->db->insert('ingredient', $data);
+            return true;
         }
 
         public function delete_ingredient($ingId)

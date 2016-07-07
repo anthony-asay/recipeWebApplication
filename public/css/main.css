@@ -16,6 +16,10 @@ body, html{
      font-family: "Gill Sans";
 }
 
+h1, h2, h3{
+  color: #4F0010;
+}
+
 html, body, #container { height: 100%; }
 body > #container { height: auto; min-height: 100%; }
 
@@ -82,7 +86,7 @@ input.star + label.star {
 
 .form{
   margin-left: 25%;
-  background-color: #EEEEEE;
+  background-color: rgba(255, 201, 170, .6);
   padding: 15px;
   width: 500px;
   border-radius: 15px 50px 30px;
@@ -122,24 +126,75 @@ label.star:before {
     margin-top: 800px;
 }
 
+select{
+  letter-spacing: 1.3px;
+  font-family: "Gill Sans";
+  color: #9D4D20;
+  font-weight: bolder;
+  font-size: 17px;
+}
+
+select:hover{
+  cursor: pointer;
+}
+
+input{
+  letter-spacing: 1.3px;
+  font-family: "Gill Sans";
+  color: #9D4D20;
+  font-weight: bolder;
+}
+
+.altbtn{
+  background-color: #AA3A50;
+  color: white;
+  border-style:none;
+  padding: 5px;
+  font-family: "Gill Sans Bold";
+  font-size: 16px;
+  border-radius: 4px 12px 7px;
+}
+
+.altbtn:hover{
+  color: black;
+  background-color: #ADE095;
+}
+
+.altbtn:disabled{
+  cursor: not-allowed;
+}
+
 /* Background image URLs and "stack" order. */
 .first-image {
-    background-image: url('/public/images/healthy-cooking.jpg');
+    background: url('/public/images/healthy-cooking.jpg') no-repeat center center fixed; 
     z-index: -3;
     opacity: 0;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+   
 }
 
 .second-image {
-    background-image: url('/public/images/baking.jpg');
+    background: url('/public/images/baking.jpg') no-repeat center center fixed; 
    z-index: -2;
     opacity: 0;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+    
 }
 
 .third-image {
-    background-image: url('/public/images/cooking.png');
+    background: url('/public/images/cooking.png') no-repeat center center fixed; 
    z-index: -1;
     opacity: 0;
-
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .first-image.show {
@@ -228,6 +283,7 @@ input{
 #formList ul{
   display: block;
   float: left;
+  width: 100%;
 }
 
 ul{
@@ -250,7 +306,7 @@ ul{
 }
 
 #formList input:hover{
-  cursor: pointer;
+  cursor: text;
   border-color: lightblue;
 }
 
@@ -270,8 +326,64 @@ form button{
   font-family: "Gill Sans Bold";
   font-size: 16px;
   color: white;
-  background-color: black;
+  background-color: #468B78;
   border-radius: 4px 12px 7px;
+}
+
+.ingredientInput li{
+  display: inline-block;
+  padding: 0;
+}
+
+.add {
+  background: url('/public/images/plus.png');
+  background-size: 50px 50px;
+  background-repeat: no-repeat;
+  border-style:none;
+  width: 55px;
+  height: 55px;
+}
+
+.remove {
+  background: url('/public/images/remove.png');
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  border-style:none;
+  width: 33px;
+  height: 33px;
+}
+
+.form-label{
+  display: inline-block;
+}
+h4{
+  font-size: 25px;
+}
+
+h5{
+  font-size: 17px;
+}
+.remove:hover {
+  cursor: pointer;
+  background: url('/public/images/removegrey.png');
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  border-style:none;
+  width: 33px;
+  height: 33px;
+}
+textarea{
+  resize: none;
+  width: 600px;
+  height: 300px;
+  letter-spacing: 1.3px;
+  font-family: "Gill Sans";
+  color: #9D4D20;
+  font-weight: bolder;
+  font-size: 20px;
+}
+.add:hover{
+  cursor: pointer;
 }
 
 button:focus {outline:0;}
@@ -286,7 +398,7 @@ button:focus {outline:0;}
 
 .btn:hover{
   color: black;
-  background-color: grey;
+  background-color: #FFC8AA;
   cursor: pointer;
 }
 
@@ -318,6 +430,11 @@ button:focus {outline:0;}
 
 .btn:disabled{
   cursor: not-allowed;
+}
+
+input:disabled{
+  cursor: not-allowed;
+  background-color: grey;
 }
 
 .moveLeft{

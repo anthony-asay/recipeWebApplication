@@ -19,6 +19,12 @@ class Recipe_model extends CI_Model {
             return $this->db->get()->result();
         }
 
+        public function Get_Types()
+        {
+            $query = $this->db->get('type_recipe');
+            return $query->result();
+        }
+
 
         public function Get_Recipes_by_type($typeId)
         {
@@ -78,6 +84,23 @@ class Recipe_model extends CI_Model {
             }
 
             return $send;
+        }
+
+        public function verifyIngredient($ing)
+        {
+            $this->db->select('i.*');
+            $this->db->from('ingredient i');
+            $this->db->where('i.id_type',$ing->id_type);
+            $this->db->where('i.name',$ing->name);
+            $query = $this->db->get();
+            if($query->num_rows() >= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public function Rate_Recipe($rating)
