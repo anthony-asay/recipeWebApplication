@@ -814,3 +814,24 @@ function setDisplayLocal(text, title)
     localStorage.setItem("display", text);
     localStorage.setItem("title", title);
 }
+
+function loadSearchForm()
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+        if (xhttp.readyState == 4 && xhttp.status == 200) 
+        {
+            var text = xhttp.responseText;
+            if(text)
+            {
+                moveUp("child", text);
+                //setDisplayLocal(text, "Edit Account");
+                document.title = "Recipe Search";
+            }
+        }
+    };
+    xhttp.open("POST", "index.php/recipe/loadRecipeSearch", true);
+    xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+    xhttp.send();
+}

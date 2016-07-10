@@ -98,6 +98,8 @@ class Recipe extends CI_Controller {
             $data['recipeTypes'] = $this->recipe_model->Get_Types();
             $data['types'] = $this->ingredient_model->Get_Types();
             $data['measurements'] = $this->measurements_model->Get_Measurements();
+            $data['T'] = $this->rand_color();
+            $data['I'] = $this->rand_color();
             $this->load->view('ingredientInput', $data);
         }
 
@@ -107,6 +109,15 @@ class Recipe extends CI_Controller {
             $this->load->view('ingForm', $data);
         }
 
+        public function rand_color() 
+        {
+            return str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+        }
+
+        public function loadRecipeSearch()
+        {
+            $this->load->view('searchForm');
+        }
         // public function AddNewUser()
         // {
         //     $user = json_decode($this->input->post('user'));

@@ -128,7 +128,6 @@ function getIngredients(type, list)
                     option.value = ingList[number].id;
                     option.text = ingList[number].name;
                     select.appendChild(option);
-                    console.log(ingList[number]);
                     number++;
                 }
                 //console.log(JSON.parse(text));
@@ -147,7 +146,6 @@ function add(id)
 
 function addIngInput(id)
 {
-    console.log(id);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() 
     {
@@ -182,7 +180,6 @@ function removeIngInput(id)
 
 function addIngForm(id, button)
 {
-    console.log(id);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() 
     {
@@ -244,7 +241,19 @@ function addRecipe(name, message, type, steps, list)
     var nameRecipe = document.getElementById(name);
     var typeRecipe = document.getElementById(type);
     var stepsRecipe = document.getElementById(steps);
-    var ingList = document.getElementById(list);
+    var ingList = document.getElementById(list).childNodes;
+    var total = ingList.length;
+    console.log(total);
+    var number = 0;
+    var ingredients = [];
 
-    var recipe = {name: nameRecipe.value, }
+    while(number < total)
+    {
+        console.log(1);
+        console.log(ingList[number].childNodes[0]);
+        number++;
+    }
+
+    var recipe = {name: nameRecipe.value, id_type: typeRecipe.value, steps: stepsRecipe.value};
 }
+

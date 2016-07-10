@@ -1,6 +1,6 @@
 <div>
 		<h5 class="form-label">Ingredient Type:</h5>
-		<select id="ingT0" onchange="getIngredients('ingT0', 'ingI0')">
+		<select id="<?php echo $T;?>" onchange="getIngredients('<?php echo $T;?>', '<?php echo $I;?>')">
 			<option>-</option>
 			<?php foreach ($types as $item): ?>
 				<option value="<?php echo $item->id;?>"><?php echo $item->name;?></option>
@@ -8,7 +8,7 @@
 		</select>
 	
 		<h5 class="form-label">Ingredient:</h5>
-		<select id="ingI0">	
+		<select id="<?php echo $I;?>">	
 			<option>-</option>
 		</select>
 	
