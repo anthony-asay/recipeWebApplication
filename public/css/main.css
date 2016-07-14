@@ -65,7 +65,6 @@ body > #container { height: auto; min-height: 100%; }
   cursor: pointer;
   transform: scale(1.5);
   background-color: rgb(10, 110, 110);
-  color:;
 }
 
 #sidebar{
