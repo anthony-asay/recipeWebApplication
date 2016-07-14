@@ -9,7 +9,9 @@ class Measurements_model extends CI_Model {
 
         public function Get_Measurements()
         {
-            $query = $this->db->get('measurements');
-            return $query->result();
+        	$this->db->select('m.*');
+            $this->db->from('measurements m');
+            $this->db->order_by('m.name','asc');
+            return $this->db->get()->result();
         }
 }

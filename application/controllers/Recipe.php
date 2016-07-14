@@ -14,7 +14,9 @@ class Recipe extends CI_Controller {
 
         public function index()
         {
-            $data['title'] = "Login";
+            //$data['recipes'] = $this->recipe_model->Get_Recipes();
+            //var_dump($data['recipes']);die;
+            $data['title'] = "Home";
             $data['recipes'] = $this->recipe_model->Get_Recipes();
 	        $this->load->view('headerR', $data);
             $this->load->view('sidebar');
@@ -103,6 +105,16 @@ class Recipe extends CI_Controller {
             $this->load->view('ingredientInput', $data);
         }
 
+        public function addIngredientSearch()
+        {
+            $data['recipeTypes'] = $this->recipe_model->Get_Types();
+            $data['types'] = $this->ingredient_model->Get_Types();
+            $data['measurements'] = $this->measurements_model->Get_Measurements();
+            $data['T'] = $this->rand_color();
+            $data['I'] = $this->rand_color();
+            $this->load->view('ingredientSearch', $data);
+        }
+
         public function addIngForm()
         {
             $data['types'] = $this->ingredient_model->Get_Types();
@@ -116,22 +128,29 @@ class Recipe extends CI_Controller {
 
         public function loadRecipeSearch()
         {
-            $this->load->view('searchForm');
+            $data['types'] = $this->recipe_model->Get_Types();
+            $this->load->view('searchForm', $data);
         }
-        // public function AddNewUser()
-        // {
-        //     $user = json_decode($this->input->post('user'));
 
-        //     $user->password = md5($user->password);
-        //     if(!$this->user_model->set_user($user))
-        //     {
-                
-        //     }
-        //     else
-        //     {
-        //         $_SESSION['userId'] = $this->db->insert_id();
-        //         $userInfo = $this->user_model->get_user($_SESSION['userId']);
-        //         echo json_encode($userInfo);
-        //     }
-        // }
+        public function loadRecipes()
+        {
+            $data['recipes'] = $this->recipe_model->Get_Recipes();
+            $this->load->view('recipeList', $data);
+        }
+
+        public function RateRecipe()
+        {
+            $rate = json_decode($this->input->post('rate'));
+
+            $this->recipe_model->Rate_Recipe($rate);
+        }
+
+        public function RecipeSearch()
+        {
+            $query = json_decode($this->input->post('query'));
+
+            $data['recipes'] = $this->recipe_model->Get_Recipes_By_Query($query);
+            $this->load->view('recipeList', $data);
+        }
+       
 }

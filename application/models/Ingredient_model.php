@@ -18,14 +18,16 @@ class Ingredient_model extends CI_Model {
             $this->db->select('i.*');
             $this->db->from('ingredient i');
             $this->db->where('i.id_type',$typeId);
-            $this->db->order_by('name','desc');
+            $this->db->order_by('name','asc');
             return $this->db->get()->result();
         }
 
         public function Get_Types()
         {
-            $query = $this->db->get('type_ingredient');
-            return $query->result();
+            $this->db->select('t.*');
+            $this->db->from('type_ingredient t');
+            $this->db->order_by('t.name','asc');
+            return $this->db->get()->result();
         }
 
         // public function Get_($name = "", $mediumId = "")

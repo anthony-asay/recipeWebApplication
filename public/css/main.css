@@ -15,9 +15,17 @@ body, html{
     letter-spacing: 1.3px;
      font-family: "Gill Sans";
 }
-
+.ingredientLi{
+  display: inline;
+}
 h1, h2, h3{
   color: #4F0010;
+}
+table {
+    border-collapse: collapse;
+}
+table, td, th {
+  border: 2px solid rgb(100, 10, 10);
 }
 
 html, body, #container { height: 100%; }
@@ -31,6 +39,36 @@ body > #container { height: auto; min-height: 100%; }
 .header button{
   font-size: 26px;
 
+}
+
+#sidebar button{
+  border-radius: 1px;
+  border-style:none;
+  margin-right: 50px;
+  padding: 20px;
+  font-family: "Gill Sans Bold";
+  font-size: 16px;
+  color: white;
+  background-color: rgb(110, 10, 10);
+   -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+#sidebar ul{
+  display: flex;
+}
+
+#sidebar button:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  background-color: rgb(10, 110, 110);
+  color:;
+}
+
+#sidebar{
+  margin-bottom: 15px;
 }
 
 #left{width: 49%;
@@ -110,7 +148,7 @@ background-repeat: no-repeat;
  
 input.star-1:checked ~ label.star:before { color: #F62; }
  
-label.star:hover { transform: rotate(20deg) scale(1.5);}
+label.star:hover { transform: rotate(20deg) scale(1.5); cursor: pointer;}
  
 label.star:before {
   
@@ -122,9 +160,9 @@ label.star:before {
     background-size: cover;
 }
 
-.some-copy {
+/*.some-copy {
     margin-top: 800px;
-}
+}*/
 
 select{
   letter-spacing: 1.3px;
@@ -199,14 +237,17 @@ input{
 
 .first-image.show {
     opacity: 1;
+    position: fixed;
 }
 
 .second-image.show {
     opacity: 1;
+    position: fixed;
 }
 
 .third-image.show {
     opacity: 1;
+    position: fixed;
 }
 
 .toggle-image {
@@ -386,6 +427,10 @@ textarea{
   cursor: pointer;
 }
 
+.mainLogo{
+  width:87%;
+}
+
 button:focus {outline:0;}
 
 #footerlist {
@@ -457,6 +502,19 @@ input:disabled{
   display: inline-block;
 }
 
+/*mobile handheld device*/
+@media only screen and (max-width:480px){
+    #ingT0 {
+        width: 85%;
+    }
+    #nameRecipe {
+        width: 85%;
+    }
+    #nameIngredient {
+        width: 90%;
+    }
+}
+
 @-webkit-keyframes mymove {
     from {right: 0px;}
     to {right: 1700px;}
@@ -487,8 +545,6 @@ input:disabled{
     from {left: 0px;}
     to {left: 1700px;}
 }
-
-@charset "UTF-8";
 
 .animated {
   -webkit-animation-duration: 1s;

@@ -1,8 +1,7 @@
 </ul>
 </div>
 </div>
-</body>
-<div id="footerlist">
+<footer id="footerlist">
     <ul>
         <li>This content is in the public domain.  Please give credit to me if you use it</li>
             <!-- <li><a href="/public/plandemo/plan.php" title="Read the site plan">Site Plan</a></li>
@@ -12,4 +11,6 @@
             <li><a href="/public/exercises/exercises.php" title="exercises page">Exercises</a></li> -->          
         <li>Last Updated <?php echo date("m/d/y") ?></li>
     </ul>
-</div>
+</footer>
+</body>
+</html>

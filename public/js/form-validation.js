@@ -243,17 +243,100 @@ function addRecipe(name, message, type, steps, list)
     var stepsRecipe = document.getElementById(steps);
     var ingList = document.getElementById(list).childNodes;
     var total = ingList.length;
-    console.log(total);
     var number = 0;
     var ingredients = [];
+    var num = 0;
 
     while(number < total)
     {
-        console.log(1);
-        console.log(ingList[number].childNodes[0]);
+        if(ingList[number].firstChild != null)
+        {
+            var node_list =  ingList[number].firstChild.childNodes;
+            var ingredient = {id_ingredient: node_list[7].value, id_measurement: node_list[11].value, quantity: node_list[15].value};
+            ingredients[num] = ingredient;
+            num++;
+        }
         number++;
     }
 
-    var recipe = {name: nameRecipe.value, id_type: typeRecipe.value, steps: stepsRecipe.value};
+    var recipe = {name: nameRecipe.value, id_type: typeRecipe.value, steps: stepsRecipe.value, ingredientList: ingredients};
+    var recipeJSON = JSON.stringify(recipe);
+    var param = "recipe="+recipeJSON;
+
+    var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() 
+        {
+            if (xhttp.readyState == 4 && xhttp.status == 200) 
+            {
+                var text = xhttp.responseText;
+                if(text)
+                {
+                    inputEl.style.borderColor = "green";
+                    inputEl.value = "";
+                    messageEl.innerHTML = text+" was added.";
+                    messageEl.style.display = "block";
+                    messageEl.style.color = "green";
+                    //document.getElementById('removeId').click();
+                }
+                else
+                {
+                    inputEl.style.borderColor = "red";
+                    messageEl.innerHTML = "There was an error.";
+                    messageEl.style.display = "block";
+                }
+            }
+        };
+        xhttp.open("POST", "index.php/recipe/AddRecipe", true);
+        xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+        xhttp.send(param);
 }
 
+function rateRecipe(id, rating, element)
+{
+    var rate = {recipe: id, rated: rating};
+    var param = "rate="+JSON.stringify(rate);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+        if (xhttp.readyState == 4 && xhttp.status == 200) 
+        {
+            var text = xhttp.responseText;
+            if(text)
+            {
+
+                var stars = element.parentNode.childNodes;
+                element.parentNode.style.opacity = "0.5";
+                for(i = 0; i < stars.length; i++)
+                {
+                    stars[i].disabled = true;
+                }
+            }
+        }
+    };
+    xhttp.open("POST", "index.php/recipe/RateRecipe", true);
+    xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+    xhttp.send(param);
+}
+
+function addIngSearch(id)
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+        if (xhttp.readyState == 4 && xhttp.status == 200) 
+        {
+            var text = xhttp.responseText;
+            if(text)
+            {
+                var list = document.getElementById(id);
+                var li = document.createElement('LI');
+                li.innerHTML = text;
+                list.appendChild(li);
+                li.className = "animated slideInDown";
+            }
+        }
+    };
+    xhttp.open("POST", "index.php/recipe/addIngredientSearch", true);
+    xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+    xhttp.send();
+}
