@@ -1,6 +1,6 @@
 
 	<div id="formRegister" class="form">
-		<div class="header"><h3>Add or <button class="btn" onclick="loadHome()">Return Home</button></h3></div>
+		<div class="header"><h3>Add New Ingredient</h3></div>
 		<form action="" method="post">
 			<ul id="formList">
 				<li>

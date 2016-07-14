@@ -6,6 +6,30 @@ class Recipe_model extends CI_Model {
 			$this->load->database();
 		}
 
+        public function Get_Recipe($id)
+        {
+            $this->db->select('r.*, t.name as type');
+            $this->db->from('recipe r');
+            $this->db->join('type_recipe t', 't.id = r.id_type', 'left');
+            $this->db->where('r.id', $id);
+            $this->db->group_by("r.id"); 
+            $this->db->order_by('r.id','asc');
+            $recipes = $this->db->get()->result();
+
+            foreach($recipes as $recipe)
+            {
+                $this->db->select('i.name as ingredient, m.name as measure, ri.quantity');
+                $this->db->from('recipe_and_ingredients ri');
+                $this->db->join('ingredient i','i.id = ri.id_ingredient', 'left');
+                $this->db->join('measurements m','m.id = ri.id_measurement', 'left');
+                $this->db->where('ri.id_recipe', $recipe->id);
+                $this->db->group_by("i.id");
+                $recipe->ingredients = $this->db->get()->result();
+            }
+            
+            return $recipes[0];
+        }
+
         public function Get_Recipes()
         {
             $this->db->select('r.*, t.name as type');
@@ -70,7 +94,6 @@ class Recipe_model extends CI_Model {
         public function Get_Recipes_By_Query($query)
         {
             $arrayRecipes = array();
-            var_dump($query->ingredientList);
             if($query->ingredientList[0] != '0')
             {
                 foreach($query->ingredientList as $ing)
@@ -114,7 +137,7 @@ class Recipe_model extends CI_Model {
                 $this->db->group_by("i.id");
                 $recipe->ingredients = $this->db->get()->result();
             }
-            var_dump($arrayRecipes);
+            
             return $arrayRecipes;
         }
 

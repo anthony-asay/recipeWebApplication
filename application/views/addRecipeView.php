@@ -1,5 +1,5 @@
 <div id="formRegister" class="form" style="width: 1050px; margin-left: 200px;">
-	<div class="header"><h3>Add Recipe or <button class="btn" onclick="loadHome()">Return Home</button></h3></div>
+	<div class="header"><h3>Add a Recipe</h3></div>
 	<form action="" method="post">
 		<div class="error" id="typeMessage"></div>
 		<ul id="formList">
@@ -30,7 +30,7 @@
 			</li>
 			<li>
 				<h4 style="display: block;">Steps:</h4>
-				<textarea id="stepsRecipe" onkeyup="enableRecipeSubmit()"></textarea>
+				<textarea id="stepsRecipe" onkeyup="enableRecipeSubmit()" placeholder="Write the steps of your recipe here..."></textarea>
 				<div class="error" id="stepsIngredientMessage"></div>
 			</li>
 		</ul>

@@ -47,7 +47,7 @@ class Recipe extends CI_Controller {
 
             if($this->recipe_model->Set_Recipe($recipe))
             {
-                echo true;
+                $this->load->view('goodJobMessage');
             }
         }
 
@@ -151,6 +151,13 @@ class Recipe extends CI_Controller {
 
             $data['recipes'] = $this->recipe_model->Get_Recipes_By_Query($query);
             $this->load->view('recipeList', $data);
+        }
+
+        public function LoadRecipe()
+        {
+            $recipe = $this->input->post('recipe');
+            $data['recipe'] = $this->recipe_model->Get_Recipe($recipe);
+            $this->load->view('recipeView', $data);
         }
        
 }

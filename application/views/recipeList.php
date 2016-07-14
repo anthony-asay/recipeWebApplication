@@ -13,7 +13,7 @@
 							<tr><p></p>
 								
 								<td><?php echo htmlspecialchars($item->type)?></td>
-								<td><?php echo htmlspecialchars($item->name)?></td>
+								<td><button class="btn" onclick="loadRecipePage(<?php echo $item->id;?>)"><?php echo htmlspecialchars($item->name)?></button></td>
 								<td>
 									
 									<?php foreach ($item->ingredients as $ingredient): ?>

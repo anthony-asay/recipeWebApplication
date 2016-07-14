@@ -2,7 +2,7 @@
 <div id="sidebar">
 	
 	<ul>
-		<li><img class='mainLogo' src="<?php echo base_url('public'); ?>/images/logo.png"></li>
+		<li><img class='mainLogo' onclick="loadHome()" src="<?php echo base_url('public'); ?>/images/logo.png"></li>
 		<li><button onclick="loadIngredientForm()">Add Ingredient</button></li>
 		<li><button onclick="loadRecipeForm()">Add Recipe</button></li>
 		<li><button onclick="loadSearchForm()">Search for Recipe</button></li>

@@ -271,18 +271,14 @@ function addRecipe(name, message, type, steps, list)
                 var text = xhttp.responseText;
                 if(text)
                 {
-                    inputEl.style.borderColor = "green";
-                    inputEl.value = "";
-                    messageEl.innerHTML = text+" was added.";
-                    messageEl.style.display = "block";
-                    messageEl.style.color = "green";
-                    //document.getElementById('removeId').click();
+                    moveUp("child", text);
+                    window.scrollTo(0, 0);
                 }
                 else
                 {
-                    inputEl.style.borderColor = "red";
-                    messageEl.innerHTML = "There was an error.";
-                    messageEl.style.display = "block";
+                    stepsRecipe.style.borderColor = "red";
+                    message.innerHTML = "There was an error.";
+                    message.style.display = "block";
                 }
             }
         };
@@ -339,4 +335,26 @@ function addIngSearch(id)
     xhttp.open("POST", "index.php/recipe/addIngredientSearch", true);
     xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
     xhttp.send();
+}
+
+function loadRecipePage(id)
+{
+    var param = "recipe="+id;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+        if (xhttp.readyState == 4 && xhttp.status == 200) 
+        {
+            var text = xhttp.responseText;
+            if(text)
+            {
+                moveRight("child", text);
+                setDisplayLocal(text, "Recipe");
+                document.title = "Recipe | GotIngredients.com";
+            }
+        }
+    };
+    xhttp.open("POST", "index.php/recipe/LoadRecipe", true);
+    xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+    xhttp.send(param);
 }
