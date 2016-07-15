@@ -18,7 +18,7 @@
 					<input id="nameIngredient" disabled class="form-control" value='' onkeyup="VerifyIngredient('nameIngredient', 'nameIngredientMessage', 'type')" type="name" title="name" name="name" placeholder="name" required/>
 					<div class="error" id="nameIngredientMessage"></div>
 				</li>
-			</ul>
+			</ul><br>
 			<button type="button" id="buttonAdd" onclick="addIngredient('nameIngredient', 'nameIngredientMessage', 'type')" disabled class="btn">Submit</button> 
 		</form>
 	</div>

@@ -1,4 +1,4 @@
-<div id="formRegister" class="form" style="width: 1050px; margin-left: 200px;">
+<div id="formRegister" class="form" style="width: 70%; margin-left: 15%;">
 	<div class="header"><h3>Add a Recipe</h3></div>
 	<form action="" method="post">
 		<div class="error" id="typeMessage"></div>

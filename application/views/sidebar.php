@@ -1,4 +1,4 @@
-<li style="width: 100%; background: rgba(8, 8, 8, 0.1);">
+<li id="navlist">
 <div id="sidebar">
 	
 	<ul>

@@ -1,4 +1,4 @@
-<div id="recipeList" class="form" style="width: 1000px; margin-left: 10%;">
+<div id="recipeList" class="form" style="width: 80%; margin: auto;">
 			<ul id="rList">
 				
 					<li>

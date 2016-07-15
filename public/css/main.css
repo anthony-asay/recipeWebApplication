@@ -48,6 +48,8 @@ body > #container { height: auto; min-height: 100%; }
   margin-right: 50px;
   padding: 20px;
   font-family: "Gill Sans Bold";
+  height: 100%;
+  width: 125px;
   font-size: 16px;
   color: white;
   background-color: rgb(110, 10, 10);
@@ -69,6 +71,11 @@ body > #container { height: auto; min-height: 100%; }
 
 #sidebar{
   margin-bottom: 15px;
+}
+#navlist{
+  margin-bottom: 15px;
+  width: 100%; 
+  background: rgba(8, 8, 8, 0.3);
 }
 
 #left{width: 49%;
@@ -428,7 +435,7 @@ textarea{
 }
 
 .mainLogo{
-  width:87%;
+  width: 90%;
   -webkit-transition: .3s ease-in-out;
   -moz-transition: .3s ease-in-out;
   -o-transition: .3s ease-in-out;
@@ -514,6 +521,49 @@ input:disabled{
   color: white;
   display: inline-block;
 }
+@media only screen and (min-width:721px) and (max-width: 999px){
+  .mainLogo{
+    display: block;
+    width: 100%;
+  }
+
+}
+
+@media only screen and (min-width:481px) and (max-width:720px){
+
+    .mainLogo{
+      display:block;
+      width:100%;
+    }
+    #ingT0 {
+        width: 80%;
+    }
+    #nameRecipe {
+        width: 80%;
+    }
+    #nameIngredient {
+        width: 80%;
+    }
+    .form {
+        width:80%;
+        margin: auto;
+    }
+    #navList {
+        margin:auto;
+    }
+    #sidebar {
+        position: static;
+        overflow: auto;
+    }
+    #sidebar ul li {
+        margin-bottom: 1px;
+        float: left;
+    }
+    textarea {
+        width: 80%;
+    }
+
+}
 
 /*mobile handheld device*/
 @media only screen and (max-width:480px){
@@ -526,6 +576,19 @@ input:disabled{
     #nameIngredient {
         width: 90%;
     }
+    .form {
+        width:80%;
+        margin: auto;
+    }
+    
+    #sidebar {
+        position: static;
+        overflow: auto;
+    }
+    textarea {
+        width: 90%;
+    }
+   
 }
 
 @-webkit-keyframes mymove {
