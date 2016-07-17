@@ -209,7 +209,6 @@ function checkLocal()
             input.innerHTML = storageIng.name;
             input.disabled = false;
             var select = document.getElementById(storageIng.id_select);
-            console.log(select);
             select.value = storageIng.type_id;
 
         }
@@ -226,8 +225,6 @@ function checkLocal()
             steps.innerHTML = recipe.steps_value;
             var ingredientList = recipe.list_values;
             var listInput = document.getElementById(recipe.list_input);
-            console.log(ingredientList);
-            console.log(listInput);
             for(i = 0; i < ingredientList.length; i++)
             {
                 listInput.innerHTML += ingredientList[i];
@@ -321,7 +318,6 @@ function searchForRecipe(list, type)
     }
     
     var query = {recipe_type: typeId, ingredientList: ingredients};
-    console.log(query);
     var query = {recipe_type: typeId, ingredientList: ingredients};
     var param = "query="+JSON.stringify(query);
 

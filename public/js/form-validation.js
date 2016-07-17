@@ -134,7 +134,6 @@ function getIngredients(type, list)
                     select.appendChild(option);
                     number++;
                 }
-                //console.log(JSON.parse(text));
             }
         }
     };
@@ -258,7 +257,6 @@ function storeRecipe()
         }
         number++;
     }
-    console.log(ingredients);
     var recipe = {name_input: 'nameRecipe', name_value: document.getElementById('nameRecipe').value, 
                   type_input: 'typeRecipe', type_value: document.getElementById('typeRecipe').value,
                   steps_input: 'stepsRecipe', steps_value: document.getElementById('stepsRecipe').value,
