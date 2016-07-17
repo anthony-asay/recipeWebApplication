@@ -6,7 +6,7 @@
 	<title><?php echo $title ?> | GotIngredients.com</title>
 	<meta name="author" content="Anthony Asay">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="<?php echo base_url('public'); ?>/css/flexslider.css" type="text/css">
+	
 	
 <link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url('public'); ?>/images/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="<?php echo base_url('public'); ?>/images/favicon/favicon-32x32.png" sizes="32x32">
@@ -19,7 +19,7 @@
 
 function cycleBackgrounds() {
     var index = 0;
-
+    checkLocal();
     var images = document.getElementById('backgroundImages').children;
     
     setInterval(function () {

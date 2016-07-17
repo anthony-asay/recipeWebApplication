@@ -337,24 +337,3 @@ function addIngSearch(id)
     xhttp.send();
 }
 
-function loadRecipePage(id)
-{
-    var param = "recipe="+id;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() 
-    {
-        if (xhttp.readyState == 4 && xhttp.status == 200) 
-        {
-            var text = xhttp.responseText;
-            if(text)
-            {
-                moveRight("child", text);
-                setDisplayLocal(text, "Recipe");
-                document.title = "Recipe | GotIngredients.com";
-            }
-        }
-    };
-    xhttp.open("POST", "index.php/recipe/LoadRecipe", true);
-    xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
-    xhttp.send(param);
-}

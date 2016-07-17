@@ -61,7 +61,7 @@ function loadRecipeForm()
             if(text)
             {
                 moveRight("child", text);
-                setDisplayLocal(text, "Add Recipe");
+                setDisplayLocal(text, "Add Recipe | GotIngredients.com");
                 document.title = "Add Recipe | GotIngredients.com";
             }
         }
@@ -82,7 +82,7 @@ function loadIngredientForm()
             if(text)
             {
                 moveLeft("child", text);
-                setDisplayLocal(text, "Add Ingredient");
+                setDisplayLocal(text, "Add Ingredient | GotIngredients.com");
                 document.title = "Add Ingredient | GotIngredients.com";
             }
         }
@@ -103,7 +103,7 @@ function loadHome()
             if(text)
             {
                 moveLeft("child", text);
-                setDisplayLocal(text, "Home");
+                setDisplayLocal(text, "Home | GotIngredients.com");
                 document.title = "Home | GotIngredients.com";
             }
         }
@@ -180,54 +180,7 @@ function fade(id, html)
     node.className += "animated fadeIn";
   //view.innerHTML = html;
   }, false );
-}
-
-function getRandomColor() 
-    {
-      var letters = '0123456789ABCDEF'.split('');
-      var color = '#';
-      for (var i = 0; i < 6; i++ ) {
-          color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
-
-
-    function showMe(id)
-    {
-      var display = document.getElementById(id).style.display;
-      if(display == 'none')
-      {
-        document.getElementById(id).style.display = "inline-block";
-      }
-      else
-      {
-        document.getElementById(id).style.display = "none";
-      }
-
-    }
-
-    function changeColor(id)
-    {
-      document.getElementById(id).style.background = getRandomColor();
-      document.getElementById(id).style.color = getRandomColor();
-    }
-
-    function showMeClass(classI)
-    {
-      var display = document.getElementsByClassName(classI).style;
-      if(display == 'none')
-      {
-       document.getElementsByClassName(classI).style.display = "inline-block";
-       
-      }
-      else
-      {
-        document.getElementsByClassName(classI).style.display = "none";
-      }
-    }
-
-    //register methods
+}  
 
 var nameValue = "";
 function VerifyName(id, id2)
@@ -255,7 +208,6 @@ function VerifyName(id, id2)
 
 function checkLocal()
 {
-    var user = JSON.parse(localStorage.getItem("user"));
     var text = localStorage.getItem("display");
     var title = localStorage.getItem("title");
     if(text)
@@ -271,7 +223,6 @@ function checkLocal()
         node.innerHTML = text; 
         node.className += "animated zoomInUp";
         document.title = title;
-        document.getElementById("userStats").innerHTML = user.id;
     }
 }
 
@@ -292,7 +243,7 @@ function loadSearchForm()
             if(text)
             {
                 moveUp("child", text);
-                //setDisplayLocal(text, "Edit Account");
+                setDisplayLocal(text, "Recipe Search | GotIngredients.com");
                 document.title = "Recipe Search | GotIngredients.com";
             }
         }
@@ -313,7 +264,7 @@ function loadRecipeList()
             if(text)
             {
                 moveUp("child", text);
-                //setDisplayLocal(text, "Edit Account");
+                setDisplayLocal(text, "Recipe List | GotIngredients.com");
                 document.title = "Recipe List | GotIngredients.com";
             }
         }
@@ -372,7 +323,7 @@ function searchForRecipe(list, type)
             if(text)
             {
                 moveUp("child", text);
-                //setDisplayLocal(text, "Edit Account");
+                setDisplayLocal(text, "Recipe Search | GotIngredients.com");
                 document.title = "Recipe Search | GotIngredients.com";
             }
             else
@@ -384,6 +335,28 @@ function searchForRecipe(list, type)
         }
     };
     xhttp.open("POST", "index.php/recipe/RecipeSearch", true);
+    xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+    xhttp.send(param);
+}
+
+function loadRecipePage(id)
+{
+    var param = "recipe="+id;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+        if (xhttp.readyState == 4 && xhttp.status == 200) 
+        {
+            var text = xhttp.responseText;
+            if(text)
+            {
+                moveRight("child", text);
+                setDisplayLocal(text, "Recipe | GotIngredients.com");
+                document.title = "Recipe | GotIngredients.com";
+            }
+        }
+    };
+    xhttp.open("POST", "index.php/recipe/LoadRecipe", true);
     xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
     xhttp.send(param);
 }
