@@ -182,29 +182,6 @@ function fade(id, html)
   }, false );
 }  
 
-var nameValue = "";
-function VerifyName(id, id2)
-{
-    var inputText = document.getElementById(id);
-    var message = document.getElementById(id2);
-    if(inputText.value.length < 4)
-    {
-        var message = document.getElementById(id2);
-        message.innerHTML = "User name must be more than 4 characters long";
-        message.style.display = "block";
-        inputText.style.borderColor = "red";
-    }
-    else
-    {
-        var message = document.getElementById(id2);
-        message.innerHTML = "";
-        message.style.display = "none";
-        inputText.style.borderColor = "green";
-        nameValue = inputText.value;
-        enableRegister();
-    }
-}
-
 
 function checkLocal()
 {
@@ -223,6 +200,40 @@ function checkLocal()
         node.innerHTML = text; 
         node.className += "animated zoomInUp";
         document.title = title;
+        if(title == "Add Ingredient | GotIngredients.com")
+        {
+            var storageIng = JSON.parse(localStorage.getItem("ingredient"));
+            localStorage.removeItem("ingredient");
+            var input = document.getElementById(storageIng.id_input);
+            input.value = storageIng.name;
+            input.innerHTML = storageIng.name;
+            input.disabled = false;
+            var select = document.getElementById(storageIng.id_select);
+            console.log(select);
+            select.value = storageIng.type_id;
+
+        }
+        if(title == "Add Recipe | GotIngredients.com")
+        {
+            var recipe = JSON.parse(localStorage.getItem("recipe"));
+            var name = document.getElementById(recipe.name_input);
+            name.value = recipe.name_value;
+            name.innerHTML = recipe.name_value;
+            var type = document.getElementById(recipe.type_input);
+            type.value = recipe.type_value;
+            var steps = document.getElementById(recipe.steps_input);
+            steps.value = recipe.steps_value;
+            steps.innerHTML = recipe.steps_value;
+            var ingredientList = recipe.list_values;
+            var listInput = document.getElementById(recipe.list_input);
+            console.log(ingredientList);
+            console.log(listInput);
+            for(i = 0; i < ingredientList.length; i++)
+            {
+                listInput.innerHTML += ingredientList[i];
+            }
+            localStorage.removeItem("recipe");
+        }
     }
 }
 

@@ -25,8 +25,11 @@ function VerifyIngredient(input, message, type)
     var inputEl = document.getElementById(input);
     if (inputEl.value.length >= 3)
     {
+        
         var messageEl = document.getElementById(message);
         var typeEl = document.getElementById(type);
+        var storageIng = {name: inputEl.value, id_input: input, type_id: typeEl.value, id_select: type};
+        localStorage.setItem("ingredient", JSON.stringify(storageIng));
         var ingredient = {id_type: typeEl.value, name: inputEl.value};
         var ingredientJSON = JSON.stringify(ingredient);
         var param = "ingredient="+ingredientJSON;
@@ -102,6 +105,7 @@ function addIngredient(input, message, type)
 
 function getIngredients(type, list)
 {
+    storeRecipe();
     var ingType = document.getElementById(type);
     var param = "type="+ingType.value;
     var xhttp = new XMLHttpRequest();
@@ -204,6 +208,7 @@ function addIngForm(id, button)
 
 function enableRecipeSubmit()
 {
+    storeRecipe();
     var name = document.getElementById('nameRecipe');
     var type = document.getElementById('typeRecipe');
     var steps = document.getElementById('stepsRecipe');
@@ -232,8 +237,33 @@ function VerifyRecipe(id, id2)
         message.style.display = "none";
         inputText.style.borderColor = "green";
         nameValue = inputText.value;
-        enableRegister();
+        storeRecipe();
     }
+}
+
+function storeRecipe()
+{
+    var ingList = document.getElementById('ingList').childNodes;
+    
+    var total = ingList.length;
+    var number = 0;
+    var ingredients = [];
+    var num = 0;
+    while(number < total)
+    {
+        if(ingList[number].firstChild != null)
+        {
+            ingredients[num] = ingList[number].outerHTML;
+            num++;
+        }
+        number++;
+    }
+    console.log(ingredients);
+    var recipe = {name_input: 'nameRecipe', name_value: document.getElementById('nameRecipe').value, 
+                  type_input: 'typeRecipe', type_value: document.getElementById('typeRecipe').value,
+                  steps_input: 'stepsRecipe', steps_value: document.getElementById('stepsRecipe').value,
+                  list_input: 'ingList', list_values: ingredients}
+    localStorage.setItem("recipe", JSON.stringify(recipe));
 }
 
 function addRecipe(name, message, type, steps, list)
