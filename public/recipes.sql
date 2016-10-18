@@ -10,6 +10,59 @@ CREATE TABLE type_recipe (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE client (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	name_first VARCHAR(50) NOT NULL,
+	name_last VARCHAR(50) NOT NULL,
+	name_middle VARCHAR(50),
+	name_user VARCHAR(255),
+	password VARCHAR(255),
+	date_birth DATE NOT NULL,
+	ssn INT(10) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE contact (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	id_client INT(11),
+	phone_number INT(15),
+	email VARCHAR(255),
+	address VARCHAR(255),
+	state VARCHAR(2),
+	zipcode INT(6),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE account_types (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	account_type VARCHAR(20) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE account (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	id_client INT(11) NOT NULL,
+	id_type INT(11) NOT NULL,
+	account_number VARCHAR(15) NOT NULL,
+	balance DECIMAL(10, 2) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE user_types (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	user_type VARCHAR(20) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE sys_user (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	id_type INT(11) NOT NULL,
+	name_user VARCHAR(255),
+	password VARCHAR(255),
+	PRIMARY KEY (id)
+);
+
+
 INSERT INTO type_recipe 
 ( id, 
 name

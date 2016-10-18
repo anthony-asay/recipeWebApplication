@@ -46,4 +46,4 @@ function cycleBackgrounds() {
     <script src="<?php echo base_url('public'); ?>/js/form-validation.js"></script>
 	<div id="container">
 		<div id="content">
-	<ul style="display: inline;" id="mainView">
+	<ul style="display: inline; padding: 0" id="mainView">

@@ -105,7 +105,6 @@ function addIngredient(input, message, type)
 
 function getIngredients(type, list)
 {
-    storeRecipe();
     var ingType = document.getElementById(type);
     var param = "type="+ingType.value;
     var xhttp = new XMLHttpRequest();
