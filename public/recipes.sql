@@ -1,7 +1,7 @@
 -- create and select the database
-DROP DATABASE IF EXISTS criticfi_recipes;
-CREATE DATABASE criticfi_recipes;
-USE criticfi_recipes;  -- MySQL command
+DROP DATABASE IF EXISTS recipes;
+CREATE DATABASE recipes;
+USE recipes;  -- MySQL command
 
 
 CREATE TABLE type_recipe (
